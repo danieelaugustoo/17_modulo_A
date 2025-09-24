@@ -1,0 +1,59 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  background-color: black;
+  justify-content: center;
+  align-items: center;
+}
+
+div {
+  position: relative;
+  display: inline-block;
+  background-color: white;
+  border-radius: 8px;
+}
+
+div img:nth-child(2),
+div img:nth-child(3) {
+  display: block;
+  width: 600px;
+  height: 300px;
+  object-fit: cover;
+}
+
+div img:nth-child(2) {
+  position: relative;
+  z-index: 1;
+}
+
+div img:nth-child(3) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  clip-path: inset(0 50% 0 0);
+}
+
+input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 100%;
+  background-image: url(splitter.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: ew-resize;
+  caret-color: transparent;
+  z-index: 3;
+}

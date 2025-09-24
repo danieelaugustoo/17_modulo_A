@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Check</title>
+  </head>
+  <body>
+    <label for="red">Red</label>
+    <input type="checkbox" id="red" />
+    <label for="green">Green</label>
+    <input type="checkbox" id="green" />
+    <label for="blue">Blue</label>
+    <input type="checkbox" id="blue" />
+    <br />
+    <input type="submit" value="Fusion" onclick="ativarFusao()" />
+  </body>
+  <script>
+    const red = document.getElementById("red");
+    const green = document.getElementById("green");
+    const blue = document.getElementById("blue");
+
+    function ativarFusao() {
+      let resultado = "";
+      if (red.checked) {
+        resultado += "R";
+      }
+      if (blue.checked) {
+        resultado += "B";
+      }
+      if (green.checked) {
+        resultado += "G";
+      }
+
+      switch (resultado) {
+        case "R":
+          alert("Red");
+          break;
+        case "B":
+          alert("Blue");
+          break;
+        case "G":
+          alert("Green");
+          break;
+        case "RB":
+          alert("Purple");
+          break;
+        case "RG":
+          alert("Yellow");
+          break;
+        case "BG":
+          alert("Cyan");
+          break;
+        case "RBG":
+          alert("White");
+          break;
+        default:
+          alert("Black");
+          break;
+      }
+    }
+  </script>
+</html>
