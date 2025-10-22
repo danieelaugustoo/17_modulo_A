@@ -2,38 +2,37 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image Compare</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div>
-      <input type="text" />
-
-      <img src="after.jpg" />
-      <img src="before.jpg" />
+    <div class="slider">
+      <img src="after.jpg" class="after" />
+      <img src="before.jpg" class="before" />
+      <input type="text" class="divider" />
+      <p id="after">After</p>
+      <p id="before">Before</p>
     </div>
   </body>
   <script>
-    const container = document.querySelector("div");
-    const divider = container.querySelector("input");
-    const afterImg = container.querySelectorAll("img")[0];
-    const beforeImg = container.querySelectorAll("img")[1];
-
+    const slider = document.querySelector(".slider");
+    const divider = document.querySelector(".divider");
+    const afterImg = document.querySelector(".after");
+    const beforeImg = document.querySelector(".before");
     let dragging = false;
-
     function moveDivider(x) {
-      const rect = container.getBoundingClientRect();
+      const rect = slider.getBoundingClientRect();
       let pos = x - rect.left;
 
       if (pos < 0) pos = 0;
       if (pos > rect.width) pos = rect.width;
 
       divider.style.left = pos + "px";
-      let percentage = (pos / rect.width) * 100;
-      beforeImg.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+      let porcentagem = (pos / rect.width) * 100;
+      beforeImg.style.clipPath = `inset(0 ${100 - porcentagem}% 0 0)`;
     }
-
-    container.addEventListener("click", (e) => moveDivider(e.clientX));
+    slider.addEventListener("click", (e) => moveDivider(e.clientX));
     divider.addEventListener("mousedown", () => (dragging = true));
     window.addEventListener("mouseup", () => (dragging = false));
     window.addEventListener("mousemove", (e) => {

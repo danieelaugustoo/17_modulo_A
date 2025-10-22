@@ -37,30 +37,27 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
 </head>
 
 <body>
-    <form class="row g-3 m-3" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
         <div class="col-md-6">
-            <label for="inputName4" class="form-label">User Name</label>
-            <input type="text" class="form-control" id="inputName4" name="name" />
+            <label for="inputName4">User Name</label>
+            <input type="text" id="inputName4" name="name" />
         </div>
-        <div class="col-md-6">
-            <label for="inputPassword4" class="form-label">Password</label>
-            <input type="password" class="form-control" id="inputPassword4" name="password" />
+        <div>
+            <label for="inputPassword4">Password</label>
+            <input type="password" id="inputPassword4" name="password" />
         </div>
 
-        <div class="col-12">
-            <button type="submit" class="btn btn-primary" name="submit">
+        <div>
+            <button type="submit" name="submit">
                 Login
             </button>
         </div>
 
     </form>
-    <p><a href="register.php"
-            class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover m-4">Cadastre-se</a>
+    <p><a href="register.php">Cadastre-se</a>
     </p>
 
 </body>
