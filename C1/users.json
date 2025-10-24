@@ -30,5 +30,9 @@
     {
         "name": "thomas",
         "password": "$2y$10$h0YHGpmW9DgSWHnYKfNUR.Y0OsKNADqftASfep2S4y6zPjnJoWH6u"
+    },
+    {
+        "name": "thomas",
+        "password": "$2y$10$gcSo.sBw4X6FH3WLthsptef329TWjsVEWCJSV\/iuj4ehRRakS6owu"
     }
 ]

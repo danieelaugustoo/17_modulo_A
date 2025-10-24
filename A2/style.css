@@ -22,13 +22,98 @@ body {
   --bgc4: #ffff77;
 }
 
-#btn p {
+#btn {
   position: relative;
   border-radius: 10px;
   overflow: hidden;
   width: 280px;
   height: 80px;
   margin: 30px;
-  border: 1px solid;
+  border: 1px solid #000;
   background-color: #fff;
+  cursor: pointer;
+  z-index: 1;
+}
+
+#btn::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  width: calc(280px / 4);
+  height: 300%;
+  background-color: var(--bgc);
+  box-shadow: calc(280px / 4 * 1) calc(-40px * 1) 0 0 var(--bgc2),
+    calc(280px / 4 * 2) calc(-40px * 2) 0 0 var(--bgc3),
+    calc(280px / 4 * 3) calc(-40px * 3) 0 0 var(--bgc4);
+  transition: 2s;
+  z-index: -1;
+}
+#btn:hover::before {
+  animation: slide-square 1.5s 1 linear forwards;
+}
+#btn:not(:hover)::before {
+  animation: square-out 1.5s 1 linear;
+}
+
+@keyframes square-out {
+  from {
+    bottom: -170%;
+  }
+  to {
+    bottom: -500%;
+  }
+}
+
+@keyframes slide-square {
+  from {
+    bottom: 100%;
+  }
+  to {
+    bottom: -170%;
+  }
+}
+
+#btn::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: -11px;
+  width: 5px;
+  height: 30px;
+  background-color: var(--arc);
+  border-radius: 50%;
+  opacity: 1;
+  --arc: #00000075;
+  box-shadow: calc(280px / 4 * 1) calc(-40px * 2) 20px 0 var(--arc),
+    calc(280px / 4 * 2) calc(-40px * 3) 20px 0 var(--arc),
+    calc(280px / 4 * 3) calc(-40px * 3) 20px 0 var(--arc);
+  transition: 2s;
+  z-index: -1;
+}
+#btn:hover::after {
+  animation: grow-arc 1.5s 1 linear forwards;
+}
+#btn:not(:hover)::after {
+  animation: shrink-arc 1.5s 1 linear forwards;
+}
+@keyframes grow-arc {
+  from {
+    bottom: 5px;
+  }
+  to {
+    bottom: 0;
+    left: -5px;
+  }
+}
+
+@keyframes shrink-arc {
+  from {
+    bottom: 5px;
+    left: 1px;
+  }
+  to {
+    bottom: 5px;
+    left: -5px;
+  }
 }
