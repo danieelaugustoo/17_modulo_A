@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+  header("Location: login.php");
+  exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -10,7 +17,6 @@
 <body>
   <nav>
     <div>
-      <a href="#">Meu Site</a>
       <div>
         <a href="logout.php">Sair</a>
       </div>
@@ -23,11 +29,6 @@
       <p>Você está logado com sucesso.</p>
     </div>
   </div>
-  <?php
-  session_start();
-  session_destroy();
-  session_unset();
-  ?>
 </body>
 
 </html>

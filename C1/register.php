@@ -1,29 +1,43 @@
 <?php
+session_start();
+function get_all_users()
+{
+  $arquivo = 'users.json';
+  if (file_exists($arquivo)) {
+    $jsonContent = file_get_contents($arquivo);
+    $users = json_decode($jsonContent, true);
+    if (is_array($users)) {
+      return $users;
+    }
+  }
+  return [];
+}
 if (isset($_POST['submit'])) {
   if (empty($_POST['name']) || empty($_POST['password'])) {
     echo '<p class="m-3">Preencha todos os dados.</p>';
   } else {
     $username = $_POST['name'];
     $password = $_POST['password'];
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    $newUser = [
-      'name' => $username,
-      'password' => $hashedPassword
-    ];
-    if (file_exists('users.json')) {
-      $readFile = file_get_contents('users.json');
-      $users = json_decode($readFile, true);
-      if (!is_array($users)) {
-        $users = [];
+    $users = get_all_users();
+    $userExists = false;
+    foreach ($users as $user) {
+      if ($username === $user['name']) {
+        echo "<p>O nome desse usuário já está em uso.</p>";
+        $userExists = true;
+        break;
       }
-    } else {
-      $users = [];
     }
-    $users[] = $newUser;
-    file_put_contents('users.json', json_encode($users, JSON_PRETTY_PRINT));
-
-    header("Location: index.php");
-    exit;
+    if (!$userExists) {
+      $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+      $newUser = [
+        'name' => $username,
+        'password' => $hashedPassword
+      ];
+      $users[] = $newUser;
+      file_put_contents('users.json', json_encode($users, JSON_PRETTY_PRINT));
+      header("Location: index.php");
+      exit;
+    }
   }
 }
 ?>

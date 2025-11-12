@@ -1,31 +1,36 @@
 <?php
 session_start();
-
+function get_all_users()
+{
+    $arquivo = 'users.json';
+    if (file_exists($arquivo)) {
+        $jsonContent = file_get_contents($arquivo);
+        $users = json_decode($jsonContent, true);
+        if (is_array($users)) {
+            return $users;
+        }
+    }
+    return [];
+}
 if (isset($_POST['submit'])) {
     if (empty($_POST['name']) || empty($_POST['password'])) {
         echo "<p>Preencha todos os dados.</p>";
     } else {
-        if (file_exists('users.json')) {
-            $jsonContent = file_get_contents('users.json');
-            $users = json_decode($jsonContent, true);
-        } else {
-            $users = [];
-        }
-
-        $userFound = false;
+        $users = get_all_users();
+        $loggedIn = false;
         foreach ($users as $user) {
             if ($_POST['name'] === $user['name']) {
                 if (password_verify($_POST['password'], $user['password'])) {
                     $_SESSION['loggedin'] = true;
                     $_SESSION['username'] = $user['name'];
-
+                    $loggedIn = true;
                     header("Location: index.php");
                     exit;
                 }
             }
         }
-        if (!$userFound) {
-            echo '<p>Usuário ou senha inválidos</p>';
+        if (!$loggedIn) {
+            echo "<p>Usuário ou senha inválidos</p>";
         }
     }
 }
@@ -41,7 +46,7 @@ if (isset($_POST['submit'])) {
 
 <body>
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-        <div class="col-md-6">
+        <div>
             <label for="inputName4">User Name</label>
             <input type="text" id="inputName4" name="name" />
         </div>
@@ -63,3 +68,6 @@ if (isset($_POST['submit'])) {
 </body>
 
 </html>
+<?php
+exit;
+?>

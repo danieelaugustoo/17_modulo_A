@@ -37,8 +37,6 @@ div {
 .divider {
   height: 100%;
   transform: translateX(-50%);
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   top: 0;
   left: 50%;
